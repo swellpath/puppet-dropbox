@@ -1,10 +1,9 @@
 class dropbox {
   include stdlib
-  include dropbox::params
+  include dropbox::config
 
   anchor { 'dropbox::begin': }
   -> class { 'dropbox::package': }
-  -> class { 'dropbox::config': } 
   ~> class { 'dropbox::service': }
   -> anchor { 'dropbox::end': }
 }
