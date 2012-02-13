@@ -46,7 +46,7 @@ class dropbox::package {
     # kill dropbox if we need to run the authorization process
     exec { 'kill dropbox':
       command => 'service dropbox stop',
-      unless  => "test -d ${dropbox::config::dx_home}/.dropbox/sigstore.dbx",
+      unless  => "test -f ${dropbox::config::dx_home}/.dropbox/sigstore.dbx",
       before  => Exec['authorize-dropbox-user']
     }
 
