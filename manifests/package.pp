@@ -33,6 +33,17 @@ class dropbox::package {
   }
 
   if ($dropbox::config::user != undef and $dropbox::config::password != undef) {
+    if $::lsbdistcodename == 'squeeze' {
+      apt::source { "swellpath-squeeze":
+        location    => "http://swdeb.s3.amazonaws.com",
+        release     => "squeeze",
+        repos       => "main",
+        key         => "4EF797A0",
+        key_server  => "subkeys.pgp.net",
+        include_src => false,
+        before      => Package['nodejs'],
+      }
+    }
     package { 'nodejs':
       ensure => installed
     }
