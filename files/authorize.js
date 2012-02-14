@@ -25,8 +25,8 @@ var die = function(error) {
 console.log('Starting dropbox-link process');
 delete process.env.DISPLAY;
 try {
-  var cmd = process.env.HOME + '/.dropbox-dist/dropbox';
-  console.log('starting ' + cmd);
+	var cmd = process.env.HOME + '/.dropbox-dist/dropbox';
+	console.log('starting ' + cmd);
 	dropboxdProcess = spawn(cmd);
 	dropboxdProcess.stdout.on('data', function(data) {
 		var resultString = String(data);
@@ -61,11 +61,11 @@ try {
 
 		if (resultString.indexOf('Client successfully linked') >= 0) {
 			console.log('All done.  Killing dropbox process.');
-      // dropbox says the client is linked before it has written the
-      // sigstore.dbx file so we need to wait a bit.
-      setTimeout(function() {
-        dropboxdProcess.kill();
-      }, 1000);
+			// dropbox says the client is linked before it has written the
+			// sigstore.dbx file so we need to wait a bit.
+			setTimeout(function() {
+				dropboxdProcess.kill();
+			}, 1000);
 		}
 	});
 } catch (e) {
