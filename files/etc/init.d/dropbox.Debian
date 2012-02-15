@@ -24,6 +24,10 @@ start() {
     echo "Starting dropbox..."
     for dbuser in $DROPBOX_USERS; do
         HOMEDIR=`getent passwd $dbuser | cut -d: -f6`
+        if [ ! -f $HOMEDIR/.dropbox/sigstore.dbx ]; then
+            echo "$dbuser is not linked to a dropbox account yet.  Cannot start dropbox."
+            continue
+        fi
         if [ -x $HOMEDIR/$DAEMON ]; then
             HOME="$HOMEDIR" start-stop-daemon -b -o -c $dbuser -S -u $dbuser -x $HOMEDIR/$DAEMON
         fi
